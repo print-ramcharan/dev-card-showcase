@@ -306,3 +306,37 @@ h1 {
 #typewriter {
   animation: blink 0.75s step-end infinite;
 }
+
+/* 🔍 SEARCH + SORT LAYOUT */
+.search-sort-wrapper {
+  display: inline-flex;      /* tighter than flex */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;                 
+  margin: 25px auto;         /* keeps block centered */
+}
+
+
+
+/* Sort Dropdown */
+#sortSelect {
+  padding: 14px 16px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#sortSelect option {
+  background: #1e293b;
+  color: white;
+}
+
+#sortSelect:hover {
+  box-shadow: 0 8px 30px rgba(79, 70, 229, 0.35);
+}

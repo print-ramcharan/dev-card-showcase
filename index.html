@@ -33,14 +33,26 @@
 <p class="subtitle">An Open Source Project built by the Community, for the Community.</p>
 
     
-<!-- 🔍 SEARCH INPUT (ADDED) -->
-<input 
-    type="text" 
-    id="searchInput" 
-    placeholder="Search contributor by name..."
-    onkeyup="filterCards()"
-    style="padding:10px; width:300px; max-width:90%; margin:20px auto; display:block;"
->
+<!-- 🔍 SEARCH + SORT WRAPPER -->
+<div class="search-sort-wrapper">
+
+    <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Search contributor by name..."
+        onkeyup="filterCards()"
+    >
+
+    <select id="sortSelect" onchange="sortCards()">
+        <option value="default">Default</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+        <option value="newest">Newest</option>
+    </select>
+
+</div>
+
+
     <!-- Container that holds all the profile cards -->
     <div class="card-container">
 
@@ -284,6 +296,42 @@ window.addEventListener('scroll', () => {
 });
 </script>
 
+<script>
+const container = document.querySelector(".card-container");
+const originalCards = Array.from(container.children);
+
+function sortCards() {
+    const value = document.getElementById("sortSelect").value;
+    let cards = Array.from(container.children);
+
+    if (value === "default") {
+        container.innerHTML = "";
+        originalCards.forEach(card => container.appendChild(card));
+        return;
+    }
+
+    if (value === "az") {
+        cards.sort((a, b) =>
+            a.querySelector("h2").innerText
+            .localeCompare(b.querySelector("h2").innerText)
+        );
+    }
+
+    if (value === "za") {
+        cards.sort((a, b) =>
+            b.querySelector("h2").innerText
+            .localeCompare(a.querySelector("h2").innerText)
+        );
+    }
+
+    if (value === "newest") {
+        cards.reverse();
+    }
+
+    container.innerHTML = "";
+    cards.forEach(card => container.appendChild(card));
+}
+</script>
 
 </body>
 </html>
